@@ -1,3 +1,8 @@
+# SteffenTools
+deploy.sh
+requirements.txt
+unittest.sh
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
