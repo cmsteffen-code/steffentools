@@ -6,8 +6,12 @@ The SteffenTools library is a compilation of various tools and functions I've cr
    :maxdepth: 2
    :caption: Contents:
 
+   source/modules
+   changelog
+
 Indices and tables
 ==================
 
 * :ref:`genindex`
+* :ref:`modindex`
 * :ref:`search`

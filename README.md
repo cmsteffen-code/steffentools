@@ -7,3 +7,13 @@ SteffenTools: Some Useful Tools
 [![GitHub contributors](https://img.shields.io/github/contributors/cmsteffen-code/steffentools.svg)](https://github.com/cmsteffen-code/steffentools/graphs/contributors)
 
 The SteffenTools library is a collection of various tools compiled into a single library for my own personal use.
+
+Installation
+------------
+To install the SteffenTools library, simply use pip:
+
+`pip install steffentools`
+
+Documentation
+-------------
+The official documentation for SteffenTools is available [on ReadTheDocs](https://steffentools.readthedocs.io/en/latest/).
