@@ -1,6 +1,10 @@
 Release History
 ===============
 
+0.1.1 (2019.03.19)
+------------------
+- Expanded the dict_to_ntuple function to account for additional data types.
+
 0.1.0 (2019.03.18)
 ------------------
 - Expanded documentation. Renamed dict_to_namedtuple to dict_to_ntuple. Implemented tests.
