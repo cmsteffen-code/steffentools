@@ -13,21 +13,31 @@ def dict_to_ntuple(input_value):
         The input value to the function can be any type of data. If it is a
         dict, dict_to_ntuple will attempt to create a namedtuple from it,
         deriving attribute names from the dict's keys. If the input_value is
-        a list, dict_to_ntuple will iterate over the list, attempting to
-        convert each of its values to a namedtuple. If the input_value is any
-        other data type, dict_to_ntuple will return it as-is.
+        a collection, such as a list or tuple, dict_to_ntuple will iterate
+        through it, attempting to convert each of its values to a namedtuple.
+        If the input_value is any other data type, dict_to_ntuple will return
+        it as-is.
 
     Returns
     -------
-    return_tuple : namedtuple
-        A nested namedtuple representing the original input_value with keys
-        converted into attribute names.
+    namedtuple (or original datatype)
+        If possible, this function will return a nested namedtuple representing
+        the original input_value with keys converted into attribute names. For
+        inputs that cannot be converted to a namedtuple, the function will
+        either return the original value (if not iterable) or will iterate over
+        the input_value and attempt to convert each member in the same way
+        before returning the converted input_value.
 
     """
     # Check if it's a list.
-    if isinstance(input_value, list):
+    if type(input_value) in (list, tuple):
         # If so, attempt to convert its elements into a namedtuple.
-        return [dict_to_ntuple(element) for element in input_value]
+        if isinstance(input_value, list):
+            # Create and return a list.
+            return [dict_to_ntuple(element) for element in input_value]
+        if isinstance(input_value, tuple):
+            # Create and return a tuple.
+            return tuple(dict_to_ntuple(element) for element in input_value)
     if not isinstance(input_value, dict):
         # If it's not a dict and not a list, return it as-is.
         return input_value
@@ -38,8 +48,19 @@ def dict_to_ntuple(input_value):
     # First, obtain a sorted list of the dictionary's keys.
     dict_keys = list(input_value.keys())
     dict_keys.sort()
-    # Next, create a namedtuple with the given keys.
-    ntuple = namedtuple("ntuple", dict_keys)
+    # Next, attempt to create a namedtuple with the given keys.
+    try:
+        ntuple = namedtuple("ntuple", dict_keys)
+    except ValueError:
+        # We could not convert the keys into a ntuple. Instead, convert each
+        # value of the dict into a ntuple, then return the dict.
+        for key in dict_keys:
+            # Create a ntuple from the value.
+            new_value = dict_to_ntuple(input_value[key])
+            # Reassign the key in the input_value.
+            input_value[key] = new_value
+        # Return the input_value dict.
+        return input_value
     # Next, create a list to store our values.
     dict_values = list()
     # Next, work through each key in turn, converting as necessary.

@@ -13,7 +13,7 @@ Submodules
 ----------
 
 steffentools.dict_to_ntuple module
---------------------------------------
+----------------------------------
 
 .. automodule:: steffentools.dict_to_ntuple
     :members:
